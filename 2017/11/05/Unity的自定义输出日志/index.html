@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          我的博客2 - Blog | lives
+          Unity的自定义输出日志 - Blog | lives
         
     </title>
 
-    <link rel="canonical" href="http://live1158.github.io/2017/11/02/写文章测试/">
+    <link rel="canonical" href="http://live1158.github.io/2017/11/05/Unity的自定义输出日志/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('01.jpg')
+            background-image: url('Demo.png')
             /*post*/
         
     }
@@ -90,16 +90,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Hexos" title="Hexos">Hexos</a>
-                            
-                              <a class="tag" href="/tags/#Blogs" title="Blogs">Blogs</a>
+                              <a class="tag" href="/tags/#Unity" title="Unity">Unity</a>
                             
                         </div>
-                        <h1>我的博客2</h1>
+                        <h1>Unity的自定义输出日志</h1>
                         <h2 class="subheading">一天进步一点</h2>
                         <span class="meta">
                             Posted by lives on
-                            2017-11-02
+                            2017-11-05
                         </span>
                     </div>
                 
@@ -154,14 +152,14 @@
 
                         
                         <li>
-                            <a href="/tags/">标签分类</a>
+                            <a href="/archive/">最近更新</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">最近更新</a>
+                            <a href="/tags/">标签分类</a>
                         </li>
                         
                     
@@ -217,12 +215,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>写文章测试</p>
-<h1><span id="第一个">第一个</span></h1>
-<p>所谓农村土地三权分置，就是所有土地的所有权归集体，农民拥有土地的承包权。后来，随着进城务工的农民把承包土地出租、转让给其他人。受让人不拥有承包权，而是一种经营权。这样，就有了三种权利，即归集体的土地所有权，归原农户的承包权，以及归实际经营者的经营权。为了顺应农民保留土地承包权、流转土地经营权的意愿，国家将土地承包经营权分为承包权和经营权，实行所有权、承包权、经营权分置并行。</p>
-<h2><span id="第二个">第二个</span></h2>
-<p>所谓农村土地三权分置，就是所有土地的所有权归集体，农民拥有土地的承包权。后来，随着进城务工的农民把承包土地出租、转让给其他人。受让人不拥有承包权，而是一种经营权。这样，就有了三种权利，即归集体的土地所有权，归原农户的承包权，以及归实际经营者的经营权。为了顺应农民保留土地承包权、流转土地经营权的意愿，国家将土地承包经营权分为承包权和经营权，实行所有权、承包权、经营权分置并行。<br>
-	<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this is a code;</div></pre></td></tr></table></figure></p>
+                <h1><span id="关于输出日志">关于输出日志</span></h1>
+<p>到了一家新公司，做的都是面对甲方现场的项目。正式接触项目之前就被告知甲方的现场总是会出现各种奇葩的问题，这就导致技术人员要无数次的出差去测试Bug并解决。好坏我就不评论了，毕竟这种模式已经进行了十几年了。我接手一个项目开始我就想着怎么规避现场的问题，后来就在项目结尾的时候写了个自定义的输出日志dll文件。</p>
+<h2><span id="第一步创建文件">第一步：创建文件</span></h2>
+<p>首先需要先引入UnityEngine.dll文件以便能够顺利的创建文件的路径。一般创建文件前我们都会先判定这个文件是否存，不存在的话在创建。文件路径我们就放在我们Data文件夹里，先创建名为Logs的文件夹我们的输出日志就放在这个文件夹里。写入的时候加上DateTime用来作为行的开头</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">        <span class="comment"><span class="doctag">///</span> 添加内容到指定位置的文档，若文档不存在则创建该文档</span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="context"&gt;</span>需要添加的内容<span class="doctag">&lt;/param&gt;</span></span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Debug</span>(<span class="params"><span class="keyword">string</span> context</span>)</span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            path = Application.dataPath + <span class="string">"/Logs"</span>;</div><div class="line">            <span class="comment">//判定是否有该文件夹,没得话则创建该文件夹</span></div><div class="line">            <span class="keyword">if</span> (!Directory.Exists(path))</div><div class="line">            &#123;</div><div class="line">                Directory.CreateDirectory(path);</div><div class="line">            &#125;</div><div class="line">            StreamWriter sw;</div><div class="line"></div><div class="line">            FileInfo fi = <span class="keyword">new</span> FileInfo(path + <span class="string">"/"</span> + FileName(<span class="string">".txt"</span>));</div><div class="line">            <span class="comment">//判定是否有该文件</span></div><div class="line">            <span class="keyword">if</span> (!fi.Exists)</div><div class="line">            &#123;</div><div class="line">                DeleteFile();</div><div class="line"></div><div class="line">                sw = fi.CreateText();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                sw = fi.AppendText();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            sw.WriteLine(System.DateTime.Now + <span class="string">"   "</span> + context);</div><div class="line">            sw.Close();</div><div class="line">            <span class="comment">//其实Close方法内部已经实现了Dispose方法&lt;br&gt;        </span></div><div class="line">            sw.Dispose();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h2><span id="第二步定义文件的名字">第二步：定义文件的名字</span></h2>
+<p>为了方便记录我就用年月日做为文件名字</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &lt;summary&gt;</span></div><div class="line">        <span class="comment"><span class="doctag">///</span> 用当前的年月日作为文档的名字</span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="format"&gt;</span>文档的格式<span class="doctag">&lt;/param&gt;</span></span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">string</span> <span class="title">FileName</span>(<span class="params"><span class="keyword">string</span> format</span>)</span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            <span class="keyword">string</span> name = System.DateTime.Now.Year.ToString() + <span class="string">"-"</span> +       System.DateTime.Now.Month.ToString()</div><div class="line">                + <span class="string">"-"</span> + System.DateTime.Now.Day.ToString()+format;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> name;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h2><span id="第三步优化">第三步：优化</span></h2>
+<p>因为我是用年月日做为文件的名字的，这样就会有个问题随着时间文件会越来越多，当时就想有木有自动删除的代码，就去查了C#代码最后实现删除10天以前的文件的功能</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line">        <span class="comment"><span class="doctag">///</span> 删除10天以前的文件</span></div><div class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DeleteFile</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">        </span>&#123;</div><div class="line">            DirectoryInfo dir = <span class="keyword">new</span> DirectoryInfo(path);</div><div class="line">            <span class="comment">//int fileNum = dir.GetFiles().Length;</span></div><div class="line">            <span class="keyword">foreach</span> (FileInfo info <span class="keyword">in</span> dir.GetFiles())</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (info.CreationTime &lt; System.DateTime.Now.AddDays(<span class="number">-10</span>))</div><div class="line">                &#123;</div><div class="line">                    info.Delete();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>做完以上步骤之后就可以生成dll文件了。</p>
+<h2><span id="第四步功能实现">第四步：功能实现</span></h2>
+<p>把dll文件放进Unity里的Plugins的文件夹里后就可以在代码中实现了<br>
+在代码的头部引入dll文件</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Log</span>.<span class="keyword">Debug</span>(<span class="string">"这是输出的内容"</span>);</div></pre></td></tr></table></figure>
+<p>ok，这样在软件运行后就可以在Data里的Log文件夹中找到我们的输出文件了。</p>
 
                 
 
@@ -232,7 +241,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2017/11/02/我的博客/" data-toggle="tooltip" data-placement="top" title="我的博客">Next Post &rarr;</a>
+                            <a href="/2017/11/02/我的博客/" data-toggle="tooltip" data-placement="top" title="写在开始之前">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -262,7 +271,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">第一个</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">第二个</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">关于输出日志</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">第一步：创建文件</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">第二步：定义文件的名字</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">第三步：优化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">第四步：功能实现</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -282,9 +291,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Hexos" title="Hexos">Hexos</a>
-                        
-                          <a class="tag" href="/tags/#Blogs" title="Blogs">Blogs</a>
+                          <a class="tag" href="/tags/#Unity" title="Unity">Unity</a>
                         
                     </div>
                 </section>
@@ -313,8 +320,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://live1158.github.io/2017/11/02/写文章测试/";
-    var disqus_url = "http://live1158.github.io/2017/11/02/写文章测试/";
+    var disqus_identifier = "http://live1158.github.io/2017/11/05/Unity的自定义输出日志/";
+    var disqus_url = "http://live1158.github.io/2017/11/05/Unity的自定义输出日志/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
