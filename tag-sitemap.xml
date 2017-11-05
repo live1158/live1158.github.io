@@ -2,20 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://live1158.github.io/tags/Hexo/</loc>
-        <lastmod>2017-11-02T09:27:45.201Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://live1158.github.io/tags/Blog/</loc>
-        <lastmod>2017-11-02T09:27:45.201Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://live1158.github.io/tags/Unreal4/</loc>
         <lastmod>2017-11-04T01:17:33.921Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,6 +11,20 @@
     <url>
         <loc>http://live1158.github.io/tags/Unity/</loc>
         <lastmod>2017-11-04T01:17:33.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://live1158.github.io/tags/Hexos/</loc>
+        <lastmod>2017-11-05T08:29:14.633Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://live1158.github.io/tags/Blogs/</loc>
+        <lastmod>2017-11-05T08:29:14.633Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

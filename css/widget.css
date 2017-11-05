@@ -55,7 +55,7 @@ ul
   ms-transition: 1.4s all;
   transition: 1.4s all;
 }
-#avatar_pic .site-author-image:hover {
+#avatar_pic:hover {
   background-color: #55dae1;
   webkit-transform: rotate(360deg) scale(1.1);
   moz-transform: rotate(360deg) scale(1.1);
